@@ -1,0 +1,53 @@
+*{
+    padding: 0px;
+    margin: 0px;
+}
+
+.right{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.right img{
+    width: 40px;
+    height: 40px;
+}
+
+.frm_container{
+    width: 60%;
+    padding: 10px 30px;
+    background-color: rgb(221, 221, 249);
+}
+
+.frm_data{
+    display: flex;
+}
+
+.frm_left{
+    flex-basis: 50%;
+    margin-right: 5px;
+}
+
+.frm_left label{
+    padding-top: 10px;
+}
+
+
+.frm_right{
+    margin-left: 5px;
+    flex-basis: 50%;
+}
+
+.frm_right label{
+    padding-top: 10px;
+}
+
+.need_center{
+    text-align: center;
+}
+
+.bg-transparent{
+    border-color: black;
+}
