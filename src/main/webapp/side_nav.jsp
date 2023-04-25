@@ -34,7 +34,8 @@
     </style>
   </head>
   <body>
-  	<%! 
+  
+  <%! 
 		private String firstName;
 		private String lastName;
 		private String fullName;
@@ -55,8 +56,8 @@
 		nominee = (String)hs.getAttribute("nominee");
 		String acc = (String)hs.getAttribute("accNumber").toString();
 		accNumber = "03941080226"+acc;
-		
 	%>  
+	 
     <div class = "nav-container">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item active">

@@ -46,10 +46,7 @@ public class AxisBalanceDao {
 			Statement st = con.createStatement();
 			String retrieveQuery = "SELECT BALANCE FROM AXISBALANCE WHERE ACCNUMBER = "+accNumber;
 			String updateQuery = "UPDATE AXISBALANCE SET BALANCE=? WHERE ACCNUMBER=?";
-			System.out.println(retrieveQuery);
-			System.out.println(updateQuery);
 			ResultSet rs = st.executeQuery(retrieveQuery);
-			System.out.println("Before Amount :: "+amount);
 			if(rs.next()) {
 				balance = rs.getInt(1);
 				if(operation.equals("plus")) {
@@ -58,7 +55,6 @@ public class AxisBalanceDao {
 					amount = balance - amount;
 				}				
 			}
-			System.out.println("After Amount :: "+amount);
 		
 			ps = con.prepareStatement(updateQuery);
 			ps.setInt(1, amount);

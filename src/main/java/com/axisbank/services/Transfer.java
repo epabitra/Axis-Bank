@@ -21,26 +21,23 @@ public class Transfer extends HttpServlet {
 		String url = ct.getInitParameter("url");
 		String uname = ct.getInitParameter("uname");
 		String dbpwd = ct.getInitParameter("password");
-		
+		System.out.println("<========= Transfer Transaction Started ===========>");
 		int amount = Integer.parseInt(req.getParameter("amount"));
 		int accNumber = Integer.parseInt(req.getParameter("accNumber"));
 		int payee = Integer.parseInt(req.getParameter("payee"));
 		
 		int balance = AxisBalanceDao.currentBalance(accNumber, driver, url, uname, dbpwd);
-		System.out.println(balance);
+		System.out.println("Account Holder Current Balance :: "+balance);
 		PrintWriter pw = resp.getWriter();
 		if(balance<amount) {
 			pw.println("insufficient");
 			return;
 		}
-		balance = balance - amount;
-		System.out.println(balance);
-		System.out.println(amount);
-		AxisBalanceDao.updateBalance(balance, Integer.toString(accNumber), dbpwd, driver, url, uname, dbpwd);
+		System.out.println("Withdra Request for :: "+amount);
+		AxisBalanceDao.updateBalance(amount, Integer.toString(accNumber), "minus", driver, url, uname, dbpwd);
 		
-		balance = AxisBalanceDao.currentBalance(payee, driver, url, uname, dbpwd);
-		balance = balance + amount;
-		AxisBalanceDao.updateBalance(balance, Integer.toString(accNumber), dbpwd, driver, url, uname, dbpwd);
+		System.out.println("Deposit Request for :: "+amount);
+		AxisBalanceDao.updateBalance(amount, Integer.toString(payee), "plus", driver, url, uname, dbpwd);
 		pw.println("success");
 		pw.close();
 	}

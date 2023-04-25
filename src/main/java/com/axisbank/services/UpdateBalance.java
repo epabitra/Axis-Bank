@@ -25,8 +25,24 @@ public class UpdateBalance extends HttpServlet{
 		int amount = Integer.parseInt(req.getParameter("amount"));
 		String accNumber = req.getParameter("accNumber");
 		String operation = req.getParameter("operation");
+		
+		if(operation.equals("minus")) {
+			int currentBalance = AxisBalanceDao.currentBalance(Integer.parseInt(accNumber), driver, url, uname, dbpwd);
+			if(currentBalance<amount) {
+				PrintWriter pw = resp.getWriter();
+				pw.println("insufficient");
+				return;
+			}
+		}
 		amount = AxisBalanceDao.updateBalance(amount, accNumber, operation, driver, url, uname, dbpwd);
-		PrintWriter pw = resp.getWriter();
-		pw.print(amount);
+		if(amount == -1) {
+			PrintWriter pw = resp.getWriter();
+			pw.print("error");
+			pw.close();
+		}else {
+			PrintWriter pw = resp.getWriter();
+			pw.print(amount);
+			pw.close();
+		}
 	}
 }

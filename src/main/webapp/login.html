@@ -35,6 +35,11 @@
             	<span id="error" style="display: none;"></span>
             </div>
             <script>
+            /**
+             * This code is used for Retrieve the param value from URL
+             * i used this for showing the Registration Successfull msg
+             * Becuase of Interviewer requirement...
+            */
             	const myUrl2 = new URL(window.location.toLocaleString());
             	const msg = myUrl2.searchParams.get('success');
             	if(msg!=null)
@@ -68,6 +73,9 @@
     </div>
 	
 	<script>
+		/** 
+		 * This is Ajax code, The purpose is to Validate the user
+		*/	
 		$("#frm").on('submit', function(event){
 			event.preventDefault();
 			let email = document.getElementById("email").value;
@@ -87,7 +95,7 @@
 	    				$("#error").css('text-align','center');
 	    			}
 	    			if(data.trim() == "success"){
-	    				window.location.href = "dynamic.jsp";
+	    				window.location.href = "details.jsp";
 	    			}
 	    		}
 	    	})

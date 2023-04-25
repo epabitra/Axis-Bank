@@ -64,6 +64,7 @@
 		  	<div class="balance_container p-4">
 			  	<label for="balance">Current Balance:</label>
 				<span id="balance"></span><br>
+				<span id="msg"></span><br>
 				<label for="deposit-input" class="form-label mt-4">Deposit</label><br>
 				<div style="display: flex">
 					<input type="text" id="deposit-input" class="form-control"/>
@@ -104,17 +105,21 @@
 			let amount = parseInt(document.getElementById("deposit-input").value);
 			let accNumber = document.getElementById("accNumber").value;
 			let params = "amount="+amount+"&accNumber="+accNumber+"&operation=plus";
-			console.log(params);
+			let msg = document.getElementById("msg");
 			$.ajax({
 	    		url: "updateBalance",
 	    		data: params,
 	    		type: 'post',
 	    		success: function(data, textStatus, jqXHR){
-	    			
-	    			if(data.trim() == "-1"){
+	    			if(data.trim() == "error"){
 	    				console.log("Some error occured");
+	    			}else{
+	    				balance.innerHTML = data.trim();
+	    				msg.innerHTML = "Deposit of amount "+amount+" is Successful";
+	    				$("#msg").css('color','green');
+	    				$("#msg").css('display','block');
+	    				$("#msg").css('text-align','center');
 	    			}
-	    			balance.innerHTML = data.trim();
 	    		}
 	    	})
 		})
@@ -130,11 +135,20 @@
 	    		data: params,
 	    		type: 'post',
 	    		success: function(data, textStatus, jqXHR){
-	    			
-	    			if(data.trim() == "-1"){
+	    			if(data.trim() == "insufficient"){
+	    				msg.innerHTML = "Insufficient Fund";
+	    				$("#msg").css('color','red');
+	    				$("#msg").css('display','block');
+	    				$("#msg").css('text-align','center');
+	    			}else if(data.trim() == "-1"){
 	    				console.log("Some error occured");
+	    			}else{
+	    				balance.innerHTML = data.trim();
+	    				msg.innerHTML = "Withdraw of amount "+amount+" is Successful";
+	    				$("#msg").css('color','yellow');
+	    				$("#msg").css('display','block');
+	    				$("#msg").css('text-align','center');
 	    			}
-	    			balance.innerHTML = data.trim();
 	    		}
 	    	})
 		})

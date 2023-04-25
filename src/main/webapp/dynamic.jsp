@@ -66,7 +66,6 @@
 		nominee = (String)hs.getAttribute("nominee");
 		String acc = (String)hs.getAttribute("accNumber").toString();
 		accNumber = "03941080226"+acc;
-		
 	%>  
   	<jsp:include page="header.html"></jsp:include>
     <div class="container2">
@@ -90,82 +89,7 @@
         	<jsp:include page="register.jsp?header=Modify Details&operation=Save Details&action=modify&fname=${firstName}&lname=${lastName}&email=${email}&dob=${dob}&phone=${phone}&nominee=${nominee}&password=${password}"></jsp:include>        	
         </div>
     </div>
-	<%--<jsp:include page="register.jsp?header=Modify Details&operation=Save Details&action=modify&fname=${firstName}&lname=${lastName}&email=${email}&dob=${dob}&phone=${phone}&nominee=${nominee}&password=${password}"></jsp:include>--%>
-	<script>
-	// This is for perform onclick on a dynamic page
-	$('body').on('click', '#modify-btn', function(event){
-		event.preventDefault();
-    	let fname = document.getElementById("fname").value;
-    	let lname = document.getElementById("lname").value;
-        let email = document.getElementById("email").value;
-        let dob = document.getElementById("dob").value;
-        let phone = document.getElementById("phone").value;
-        let nominee = document.getElementById("nominee").value;
-        let password = document.getElementById("password").value;
-        let re_password = document.getElementById("re-password").value;
-        let error = document.getElementById("error");
-     
-        let params = "fname="+fname+"&lname="+lname+"&dob="+dob+"&email="+email+"&phone="+phone+"&nominee="+nominee+"&password="+password+"&re-password="+re_password;
-        $.ajax({
-    		url: "modify",
-    		data: params,
-    		type: 'post',
-    		success: function(data, textStatus, jqXHR){
-    			if(data.trim() == "empty"){
-    				error.innerHTML = "Please Fill All The Fields";
-    				$("#error").css('color','red');
-    				$("#error").css('display','block');
-    				$("#error").css('text-align','center');
-    			}
-    			if(data.trim() == "mismatch"){
-    				error.innerHTML = "Password Mismatch";
-    				$("#error").css('color','red');
-    				$("#error").css('display','block');
-    				$("#error").css('text-align','center');
-    			}
-    			if(data.trim() == "success"){
-    				window.location.href = "login.html?success=User Updated Successfully Please Login Again";
-    			}
-    			if(data.trim() == "error"){
-    				error.innerHTML = "Some error occured try again";
-    				$("#error").css('color','red');
-    				$("#error").css('display','block');
-    				$("#error").css('text-align','center');
-    			}
-    		}
-    	})
-	})
-	<%--
-		// loadContent Function called below
-		function loadContent(link) {
-			var xhttp = new XMLHttpRequest();
-			xhttp.onreadystatechange = function() {
-				if (this.readyState == 4 && this.status == 200) {
-					document.getElementById("right").innerHTML = this.responseText;
-				}
-			};
-			console.log(link);
-			xhttp.open("GET", link, true);
-			xhttp.send();
-		}
-		
-		$(".nav-item").on('click', function(){
-			$(".active").removeClass("active");
-            $(this).addClass("active");
-            
-            let tag1 = document.querySelector('.active .hb').value;
-            if(tag1 == 1){
-            	loadContent("details.jsp");
-            }
-            if(tag1 == 2){
-            	loadContent("register.jsp?header=Modify Details&operation=Save"+
-            			"Details&action=modify&fname=${firstName}&lname=${lastName}&email=${email}"+
-            			"&dob=${dob}&phone=${phone}&nominee=${nominee}&password=${password}");
-            }
-            if(tag1 == 3){
-            }
-		})--%>
-	</script>
+	
 	
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"

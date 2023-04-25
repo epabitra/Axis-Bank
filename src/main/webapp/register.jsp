@@ -73,6 +73,7 @@
                 class="form-control bg-transparent"
                 name="re-password"
                 id="re-password"
+                value="${param.password}"
               />
             </div>
           </div>
